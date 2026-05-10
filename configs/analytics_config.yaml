@@ -1,0 +1,37 @@
+# ──────────────────────────────────────────────
+# analytics_config.yaml
+# Counting lines, zones, alerts, heatmap config
+# ──────────────────────────────────────────────
+
+analytics:
+  enabled: true
+
+  # ── Virtual counting lines ───────────────────
+  # Each line is defined by two (x,y) points in pixel coordinates.
+  # Direction is determined by cross-product of motion vector vs line normal.
+  counting_lines: []
+    # Add more lines as needed
+
+  # ── Dwell / heatmap ──────────────────────────
+  heatmap:
+    enabled: false
+    sigma: 25                        # Gaussian blur radius in pixels
+    alpha: 0.50                      # heatmap overlay transparency
+    colormap: "JET"                  # OpenCV colormap name
+    decay: 0.98                      # per-frame decay factor (1.0 = no decay)
+    save_interval_seconds: 60        # how often to save heatmap PNG to disk
+
+  # ── Crowd density alerts ─────────────────────
+  crowd:
+    max_persons: 10                  # alert when more than N people in frame
+    alert_cooldown_seconds: 5        # min seconds between repeat alerts
+
+  # ── Compliance alerts ────────────────────────
+# In analytics_config.yaml:
+  compliance:
+    alert_on_violation: true
+    violation_cooldown_seconds: 10   # was 3 — increase to reduce flicker
+
+  # ── MLflow flush interval ────────────────────
+  mlflow:
+    flush_interval_seconds: 5        # buffer metrics, flush every N seconds
