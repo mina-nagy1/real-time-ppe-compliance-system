@@ -1,0 +1,23 @@
+# ──────────────────────────────────────────────
+# stream_config.yaml
+# Video source and output settings
+# ──────────────────────────────────────────────
+
+stream:
+  # ── Input source (pick one) ──────────────────
+  source: demo3.mp4                          # 0 = webcam
+  # source: "data/samples/site.mp4"  # pre-recorded video
+  # source: "rtsp://user:pass@ip/stream"  # IP camera
+
+  width: 1280
+  height: 720
+  fps: 30
+  buffer_size: 2                     # keep queue small to stay real-time
+
+  # ── Output ───────────────────────────────────
+  save_video: false
+  output_path: "outputs/videos/output.mp4"
+  fourcc: "mp4v"
+
+  # ── MJPEG stream (served by FastAPI) ─────────
+  jpeg_quality: 85                   # 1-100, lower = faster network

@@ -1,0 +1,36 @@
+# ──────────────────────────────────────────────
+# model_config.yaml
+# Controls detector behaviour and PPE class map
+# Dataset: Construction Site Safety by Roboflow Universe Projects
+# https://universe.roboflow.com/roboflow-universe-projects/construction-site-safety
+# ──────────────────────────────────────────────
+
+model:
+  weights: "models/best.pt"           # fine-tuned PPE model (falls back to yolo11n-seg.pt)
+  device: "cpu"                        # "cpu" | "cuda" | "mps"
+  imgsz: 640  
+  conf_threshold: 0.22
+  iou_threshold: 0.45
+  half_precision: false                # FP16 — set true only on CUDA
+
+# Exact class IDs from Construction Site Safety dataset v28
+classes:
+  0: "Hardhat"
+  1: "Mask"
+  2: "NO-Hardhat"
+  3: "NO-Mask"
+  4: "NO-Safety Vest"
+  5: "Person"
+  6: "Safety Cone"
+  7: "Safety Vest"
+  8: "machinery"
+  9: "vehicle"
+
+# Compliance rules — worker MUST have all required items
+compliance:
+  required: ["Hardhat", "Safety Vest", "Mask"]
+  violation_classes: ["NO-Hardhat", "NO-Safety Vest", "NO-Mask"]
+
+segmentation:
+  enabled: false                      # false → detection-only fallback
+  mask_alpha: 0.40                    # overlay transparency

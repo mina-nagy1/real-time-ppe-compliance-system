@@ -1,0 +1,46 @@
+# ──────────────────────────────────────────────
+# tracker_config.yaml
+# BoxMOT tracker selection and tuning
+# ──────────────────────────────────────────────
+
+tracker:
+  name: "bytetrack"                  # "bytetrack" | "deepocsort" | "botsort"
+  reid_weights: "osnet_x0_25_msmt17.pt"   # ReID model for DeepOCSORT / BoTSORT
+  device: "cpu"
+  half: false
+
+bytetrack:
+  track_high_thresh: 0.25    # was 0.50 — accept more detections into tracker
+  track_low_thresh:  0.05    # was 0.10
+  new_track_thresh:  0.25    # was 0.60 — easier to create new tracks
+  track_buffer:      60      # was 30 — keep lost tracks longer at low FPS
+  match_thresh:      0.90    # was 0.80
+  frame_rate:        10      # was 30 — set to actual FPS you're getting
+
+
+deepocsort:
+  det_thresh: 0.45
+  max_age: 30
+  min_hits: 3
+  iou_threshold: 0.30
+  delta_t: 3
+  asso_func: "iou"
+  inertia: 0.20
+  use_byte: false
+
+botsort:
+  track_high_thresh: 0.50
+  track_low_thresh: 0.10
+  new_track_thresh: 0.60
+  track_buffer: 30
+  match_thresh: 0.80
+  proximity_thresh: 0.50
+  appearance_thresh: 0.25
+  frame_rate: 30
+
+visualization:
+  trail_length: 40                   # max frames to draw motion trail
+  trail_thickness: 2
+  mask_alpha: 0.35
+  bbox_thickness: 2
+  font_scale: 0.55
