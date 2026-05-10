@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  ppe-system:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: ppe-compliance-system
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persist outputs and database outside the container
+      - ./outputs:/app/outputs
+      # Mount model weights (not tracked in git — place best.pt here)
+      - ./models/best.pt:/app/models/best.pt:ro
+      # Mount video source if using a file instead of camera
+      # - ./data/samples:/app/data/samples:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
