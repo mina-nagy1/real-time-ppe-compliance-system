@@ -104,6 +104,9 @@ real-time-ppe-compliance-system/
 │   ├── routes.py             # REST endpoints
 │   ├── websocket.py          # WebSocket connection manager
 │   └── schemas.py            # Pydantic request/response models
+├── assets/
+│   ├── loss_curves.png
+│   └── confusion_matrix.png
 ├── dashboard/
 │   └── index.html            # Dark-mode live dashboard
 ├── notebooks/
